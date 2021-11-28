@@ -1,12 +1,24 @@
-import { test } from 'tap'
+import { FastifyInstance } from 'fastify';
 import { build } from '../helper'
+describe('example test', () => {
+  let app: FastifyInstance;
 
-test('example is loaded', async (t) => {
-  const app = await build(t)
-
-  const res = await app.inject({
-    url: '/example'
+  beforeAll(async () => {
+    app = await build();
   })
 
-  t.equal(res.payload, 'this is an example')
+
+  // Tear down our app after we are done
+  afterAll(async () => {
+    await app.close()
+  })
+
+  it('example is loaded', async () => {
+    const res = await app.inject({
+      url: '/example'
+    })
+
+    expect(res.payload).toBe('this is an example')
+  })
+
 })
