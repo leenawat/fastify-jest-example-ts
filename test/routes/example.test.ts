@@ -1,17 +1,6 @@
-import { FastifyInstance } from 'fastify';
 import { build } from '../helper'
 describe('example test', () => {
-  let app: FastifyInstance;
-
-  beforeAll(async () => {
-    app = await build();
-  })
-
-
-  // Tear down our app after we are done
-  afterAll(async () => {
-    await app.close()
-  })
+  const app = build();
 
   it('example is loaded', async () => {
     const res = await app.inject({

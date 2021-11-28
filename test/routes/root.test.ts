@@ -1,18 +1,7 @@
-import { FastifyInstance } from 'fastify';
 import { build } from '../helper'
 
 describe('root tests', () => {
-  let app: FastifyInstance;
-
-  beforeAll(async () => {
-    app = await build();
-  })
-
-
-  // Tear down our app after we are done
-  afterAll(async () => {
-    await app.close()
-  })
+  const app = build();
 
   it('default root route', async () => {
 
