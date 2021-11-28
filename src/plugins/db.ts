@@ -1,17 +1,15 @@
-const knex = require('knex');
-import fp from "fastify-plugin";
+import fp from 'fastify-plugin'
+import knex, { Knex } from 'knex';
+import db from '../config/database';
 
-module.exports = fp(async (fastify: any, opts: any, done: any) => {
-    const connection = await knex({
-        client: 'mysql2',
-        connection: {
-            port: 3306,
-            host: 'localhost',
-            user: 'root',
-            password: 'password',
-            database: 'fastify-jest-example'
-        }
-    })
-    fastify.decorate("db", connection)
+export default fp(async (fastify:any, opts:any, done:any) => {
+    fastify.decorate('db', await db)
     done()
 })
+
+// When using .decorate you have to specify added properties for Typescript
+declare module 'fastify' {
+    export interface FastifyInstance {
+        db: Knex;
+    }
+}
