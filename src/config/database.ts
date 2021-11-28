@@ -2,7 +2,6 @@ import knex from 'knex';
 import config from 'config';
 
 const dbConfig: any = config.get('database');
-console.log({ dbConfig })
 export default knex({
     client: dbConfig.client,
     connection: {

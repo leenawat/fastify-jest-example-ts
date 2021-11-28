@@ -11,7 +11,6 @@ export default async (fastify: FastifyInstance) => {
 
   fastify.post('/api/users', async (request: FastifyRequest, reply: FastifyReply) => {
     const data = request.body;
-    console.log({ body: request.body })
     await UserModel.save(db, data);
     return "User created";
   })

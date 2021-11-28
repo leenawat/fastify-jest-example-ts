@@ -1,52 +1,39 @@
 import { build } from '../helper'
 import db from '../../src/config/database'
 
+const app = build();
+
+const postUser = () => {
+    return app.inject({
+        url: '/api/users',
+        method: 'post',
+        payload: {
+            "first_name": "Leenawat",
+            "last_name": "Papahom",
+            "username": "leenawat",
+            "password": "123456"
+        }
+    })
+}
+
 beforeEach(async () => {
     await db('users').truncate()
-  });
+});
 
 describe('user tests', () => {
-    const app = build();
 
     it('returns 200 ok when signup request is valid', async () => {
-        const res = await app.inject({
-            url: '/api/users',
-            method: 'post',
-            payload: {
-                "first_name": "Leenawat",
-                "last_name": "Papahom",
-                "username": "leenawat",
-                "password": "123456"
-            }
-        })
+        const res = await postUser();
         expect(res.statusCode).toBe(200)
     })
 
     it('returns success message when signup request is valid', async () => {
-        const res = await app.inject({
-            url: '/api/users',
-            method: 'post',
-            payload: {
-                "first_name": "Leenawat",
-                "last_name": "Papahom",
-                "username": "leenawat",
-                "password": "123456"
-            }
-        })
+        const res = await postUser();
         expect(res.payload).toBe('User created');
     });
 
     it('save the user to database', async () => {
-        await app.inject({
-            url: '/api/users',
-            method: 'post',
-            payload: {
-                "first_name": "Leenawat",
-                "last_name": "Papahom",
-                "username": "leenawat",
-                "password": "123456"
-            }
-        })
+        await postUser();
         const userList = await db('users').select()
         expect(userList.length).toBe(1);
     });
