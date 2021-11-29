@@ -1,5 +1,5 @@
 import fp from 'fastify-plugin'
-import knex, { Knex } from 'knex';
+import { Knex } from 'knex';
 import db from '../config/database';
 
 export default fp(async (fastify:any, opts:any, done:any) => {

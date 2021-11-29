@@ -1,10 +1,9 @@
-import { Knex } from 'knex'
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
-import { MyUserModel } from '../models/user';
+import UserModel from '../models/user';
 import bcrypt from 'bcryptjs';
 
 export default async (fastify: FastifyInstance) => {
-  const userModel = new MyUserModel(fastify.db);
+  const userModel = new UserModel(fastify.db);
 
   fastify.get('/api/users', async (request: FastifyRequest, reply: FastifyReply) => {
     return await userModel.select();

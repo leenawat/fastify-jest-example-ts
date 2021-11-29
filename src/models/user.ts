@@ -3,7 +3,7 @@ import { Knex } from 'knex'
 // ต้องใช้ Knex ตัวใหญ๋
 // https://github.com/knex/knex/blob/master/UPGRADING.md
 
-export class MyUserModel {
+export default class UserModel {
     db: Knex;
 
     constructor(db: Knex) {
@@ -17,7 +17,7 @@ export class MyUserModel {
     async save(data: any) {
         return await this.db('users').insert(data)
     }
-    
+
     async findByUsername(username: any) {
         return await this.db('users').select().where({ username }).first()
     }

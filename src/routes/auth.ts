@@ -1,10 +1,9 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify'
-import { Knex } from 'knex';
-import { MyUserModel } from '../models/user'
+import UserModel from '../models/user'
 import bcrypt from 'bcryptjs';
 
 export default async (fastify: FastifyInstance) => {
-  const userModel = new MyUserModel(fastify.db);
+  const userModel = new UserModel(fastify.db);
   fastify.post('/api/auth/sign-in', {
     schema: {
       body: {
