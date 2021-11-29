@@ -10,4 +10,7 @@ export class userModel {
     async save(db: Knex, data: any) {
         return  await db('users').insert(data)
     }
+    async findByUsername(db: Knex, username: any) {
+        return  await db('users').select().where({username}).first()
+    }
 }

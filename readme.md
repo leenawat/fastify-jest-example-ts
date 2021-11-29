@@ -33,5 +33,7 @@ db-migrate up --config config/develop.json -e database
 - [fastify-jest-example](https://github.com/wolfejw86/blog-examples/tree/master/fastify-jest-example)
 - [npm run dev in typescript project, watch is not workin](https://github.com/fastify/fastify-cli/issues/246#issuecomment-915604892)
 - [TypeScript / Node.js: Importing Knex into an ES6 module](https://dev.to/asteinarson/typescript-node-js-importing-knex-into-es6-module-1poc)
+- [Password Salting: เค็มแต่ดี](https://blog.sethanantp.com/password-salting/)
+- [ทำไมต้องใช้ bcrypt ในการ Hash Password](https://blog.sethanantp.com/why-using-bcrypt/)
 
 
