@@ -18,13 +18,3 @@ export default fp(async (fastify: any, opts: any, done: any) => {
   })
   done()
 })
-
-// When using .decorate you have to specify added properties for Typescript
-declare module 'fastify' {
-  export interface FastifyRequest {
-    jwtVerify: any;
-  }
-  export interface FastifyInstance {
-    jwt: any;
-  }
-}

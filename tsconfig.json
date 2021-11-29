@@ -64,7 +64,8 @@
         "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "typings/**/*.ts"
     ],
     "exclude": [
         "node_modules",
