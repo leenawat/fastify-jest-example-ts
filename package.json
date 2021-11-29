@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "db-migrate": "^0.11.13",
     "db-migrate-mysql": "^2.2.0",
@@ -35,6 +36,7 @@
     "tsc-node": "0.0.3"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/config": "0.0.40",
     "@types/jest": "^27.0.3",
     "@types/knex": "^0.16.1",

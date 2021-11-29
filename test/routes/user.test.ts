@@ -3,18 +3,31 @@ import db from '../../src/config/database'
 
 const app = build();
 
+const validUser = {
+    "first_name": "Leenawat",
+    "last_name": "Papahom",
+    "username": "leenawat",
+    "password": "123456"
+}
+
 const postUser = () => {
     return app.inject({
         url: '/api/users',
         method: 'post',
-        payload: {
-            "first_name": "Leenawat",
-            "last_name": "Papahom",
-            "username": "leenawat",
-            "password": "123456"
-        }
+        payload: validUser
     })
 }
+
+const postUser2 = () => {
+    const payload = {...validUser}
+    payload.username = "leenawat2";
+    return app.inject({
+        url: '/api/users',
+        method: 'post',
+        payload
+    })
+}
+
 
 beforeEach(async () => {
     await db('users').truncate()
@@ -38,4 +51,16 @@ describe('user tests', () => {
         expect(userList.length).toBe(1);
     });
 
+    it('password ที่เก็บใน database ต้องไม่เป็น plaintext', async () => {
+        await postUser();
+        const user = await db('users').first()
+        expect(user.password).not.toBe(validUser.password);
+    });
+
+    it('user 2 คนที่มี password เหมือนกัน จะต้องถูกเก็บโดยเข้ารหัสแล้วต้องไม่เหมือนกัน', async () => {
+        await postUser();
+        await postUser2();
+        const userList = await db('users').select()
+        expect(userList[0].password).not.toBe(userList[1].password);
+    });
 })
