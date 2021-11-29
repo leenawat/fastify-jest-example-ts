@@ -3,14 +3,22 @@ import { Knex } from 'knex'
 // ต้องใช้ Knex ตัวใหญ๋
 // https://github.com/knex/knex/blob/master/UPGRADING.md
 
-export class userModel {
-    async select(db: Knex) {
-        return await db('users').select()
+export class MyUserModel {
+    db: Knex;
+
+    constructor(db: Knex) {
+        this.db = db;
     }
-    async save(db: Knex, data: any) {
-        return  await db('users').insert(data)
+
+    async select() {
+        return await this.db('users').select()
     }
-    async findByUsername(db: Knex, username: any) {
-        return  await db('users').select().where({username}).first()
+
+    async save(data: any) {
+        return await this.db('users').insert(data)
+    }
+    
+    async findByUsername(username: any) {
+        return await this.db('users').select().where({ username }).first()
     }
 }

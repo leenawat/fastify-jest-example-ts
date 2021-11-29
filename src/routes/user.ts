@@ -1,13 +1,13 @@
 import { Knex } from 'knex'
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
-import { userModel } from '../models/user';
+import { MyUserModel } from '../models/user';
 import bcrypt from 'bcryptjs';
 
 export default async (fastify: FastifyInstance) => {
-  const db: Knex = fastify.db;
-  const UserModel = new userModel();
+  const userModel = new MyUserModel(fastify.db);
+
   fastify.get('/api/users', async (request: FastifyRequest, reply: FastifyReply) => {
-    return await UserModel.select(db);
+    return await userModel.select();
   })
 
   fastify.post('/api/users', {
@@ -17,7 +17,7 @@ export default async (fastify: FastifyInstance) => {
         properties: {
           username: {
             type: 'string',
-            minLength: 6,
+            minLength: 4,
             maxLength: 20
           },
           password: {
@@ -33,7 +33,7 @@ export default async (fastify: FastifyInstance) => {
   }, async (request: FastifyRequest, reply: FastifyReply) => {
     const data: any = request.body;
     data.password = bcrypt.hashSync(data.password, 10);
-    await UserModel.save(db, data);
+    await userModel.save(data);
     return "User created";
   }) 
 }

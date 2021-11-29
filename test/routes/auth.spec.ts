@@ -36,7 +36,7 @@ describe('Authentication', () => {
         expect(res.statusCode).toBe(200);
     });
 
-    fit('returns 401 ถ้า password ไม่ถูกต้อง', async () => {
+    it('returns 401 ถ้า password ไม่ถูกต้อง', async () => {
         await addUser();
         const res = await postAuthentication({ username: 'user1', password: 'Invalidpassword' });
         expect(res.statusCode).toBe(401);

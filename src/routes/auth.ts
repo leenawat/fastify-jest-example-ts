@@ -1,11 +1,10 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import { Knex } from 'knex';
-import { userModel } from '../models/user'
+import { MyUserModel } from '../models/user'
 import bcrypt from 'bcryptjs';
 
 export default async (fastify: FastifyInstance) => {
-  const db: Knex = fastify.db;
-  const UserModel = new userModel();
+  const userModel = new MyUserModel(fastify.db);
   fastify.post('/api/auth/sign-in', {
     schema: {
       body: {
@@ -13,7 +12,7 @@ export default async (fastify: FastifyInstance) => {
         properties: {
           username: {
             type: 'string',
-            minLength: 6,
+            minLength: 4,
             maxLength: 20
           },
           password: {
@@ -28,7 +27,7 @@ export default async (fastify: FastifyInstance) => {
     }
   }, async function (request, reply) {
     const data: any = request.body;
-    const userDb: any = await UserModel.findByUsername(db, data.username)
+    const userDb: any = await userModel.findByUsername(data.username)
     if (!userDb) {
       reply.code(401).send({ message: 'Incorrect credentials' })
     }
