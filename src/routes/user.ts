@@ -1,6 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
 import UserModel from '../models/user';
 import bcrypt from 'bcryptjs';
+import Joi from "joi";
 
 export default async (fastify: FastifyInstance) => {
   const userModel = new UserModel(fastify.db);
@@ -11,23 +12,10 @@ export default async (fastify: FastifyInstance) => {
 
   fastify.post('/api/users', {
     schema: {
-      body: {
-        type: 'object',
-        properties: {
-          username: {
-            type: 'string',
-            minLength: 4,
-            maxLength: 20
-          },
-          password: {
-            type: 'string',
-            minLength: 6,
-            maxLength: 20
-          }
-        },
-        required: ["username", "password"],
-        additionalProperties: true,
-      },
+      body: Joi.object({
+        username: Joi.string().alphanum().min(4).max(20).required(),
+        password: Joi.string().alphanum().min(6).max(20).required()
+      }).required(),
     }
   }, async (request: FastifyRequest, reply: FastifyReply) => {
     const data: any = request.body;
