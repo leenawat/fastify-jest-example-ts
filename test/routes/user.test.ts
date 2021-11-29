@@ -28,13 +28,12 @@ const postUser2 = () => {
     })
 }
 
-
-beforeEach(async () => {
-    await db('users').truncate()
-});
-
 describe('user tests', () => {
 
+    beforeEach(async () => {
+        await db('users').truncate()
+    });
+    
     it('returns 200 ok when signup request is valid', async () => {
         const res = await postUser();
         expect(res.statusCode).toBe(200)
@@ -46,8 +45,11 @@ describe('user tests', () => {
     });
 
     it('save the user to database', async () => {
+        // await db('users').truncate()
+        let userList = await db('users').select()
+        expect(userList.length).toBe(0);
         await postUser();
-        const userList = await db('users').select()
+        userList = await db('users').select()
         expect(userList.length).toBe(1);
     });
 
@@ -62,5 +64,6 @@ describe('user tests', () => {
         await postUser2();
         const userList = await db('users').select()
         expect(userList[0].password).not.toBe(userList[1].password);
+        await db('users').truncate()
     });
 })

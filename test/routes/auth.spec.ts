@@ -1,13 +1,8 @@
 import { build } from '../helper'
 import db from '../../src/config/database'
 import bcrypt from 'bcryptjs';
-import { Knex } from 'knex';
 
 const app = build();
-
-beforeEach(async () => {
-    await db('users').truncate()
-});
 
 const activeUser = { username: 'user1', password: 'P4ssword', first_name: "User1", last_name: "LastName1" };
 
@@ -30,6 +25,12 @@ const postAuthentication = async (credentials: any, options = {}) => {
 
 
 describe('Authentication', () => {
+
+    beforeEach(async () => {
+        await db('users').truncate()
+    });
+
+
     it('returns 200 when credentials are correct', async () => {
         await addUser();
         const res = await postAuthentication(credentials);
@@ -41,4 +42,8 @@ describe('Authentication', () => {
         const res = await postAuthentication({ username: 'user1', password: 'Invalidpassword' });
         expect(res.statusCode).toBe(401);
     });
+
+    // ป้องกันไม่ให้ไปถึง database โดยไม่จำเป็น
+    it.todo('ใส่ username น้อยกว่า 4 ตัว ต้อง return validation error')
+    it.todo('ใส่ password น้อยกว่า 6 ตัว ต้อง return validation error')
 })
