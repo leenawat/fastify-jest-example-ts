@@ -35,5 +35,7 @@ db-migrate up --config config/develop.json -e database
 - [TypeScript / Node.js: Importing Knex into an ES6 module](https://dev.to/asteinarson/typescript-node-js-importing-knex-into-es6-module-1poc)
 - [Password Salting: เค็มแต่ดี](https://blog.sethanantp.com/password-salting/)
 - [ทำไมต้องใช้ bcrypt ในการ Hash Password](https://blog.sethanantp.com/why-using-bcrypt/)
+- [How to set up Eslint with Typescript in VS Code](https://thesoreon.com/blog/how-to-set-up-eslint-with-typescript-in-vs-code)
+- [Setting up TypeScript with ESLint & Prettier for Visual Studio Code](https://dev.to/sam_piggott/setting-up-typescript-with-eslint-prettier-for-visual-studio-code-1e3h)
 
 

@@ -1,6 +1,6 @@
 import { build } from '../helper'
 describe('example test', () => {
-  const app = build();
+  const app = build()
 
   it('example is loaded', async () => {
     const res = await app.inject({

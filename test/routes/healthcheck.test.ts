@@ -1,4 +1,4 @@
-import { build } from '../helper';
+import { build } from '../helper'
 
 describe('healthcheck test', () => {
      const app = build()

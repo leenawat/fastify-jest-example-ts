@@ -4,10 +4,10 @@ import { Knex } from 'knex'
 // https://github.com/knex/knex/blob/master/UPGRADING.md
 
 export default class UserModel {
-    db: Knex;
+    db: Knex
 
     constructor(db: Knex) {
-        this.db = db;
+        this.db = db
     }
 
     async select() {

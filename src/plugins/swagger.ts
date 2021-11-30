@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import fp from 'fastify-plugin'
-import { FastifyRequest, FastifyReply } from 'fastify';
+import FastifySwagger from 'fastify-swagger'
 const convert = require('joi-to-json')
 
 export default fp(async (fastify: any, opts: any, done: any) => {
-    fastify.register(require('fastify-swagger'), {
+    fastify.register(FastifySwagger, {
         routePrefix: '/swagger',
         openapi: {
             info: {
@@ -24,9 +25,9 @@ export default fp(async (fastify: any, opts: any, done: any) => {
             components: {
                 securitySchemes: {
                     bearer: {
-                        type: "http",
-                        scheme: "bearer",
-                        bearerFormat: "JWT",
+                        type: 'http',
+                        scheme: 'bearer',
+                        bearerFormat: 'JWT',
                     }
                 }
             },

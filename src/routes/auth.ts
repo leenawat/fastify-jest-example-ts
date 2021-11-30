@@ -1,10 +1,10 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import UserModel from '../models/user'
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs'
 import Joi from 'joi'
 
 export default async (fastify: FastifyInstance) => {
-  const userModel = new UserModel(fastify.db);
+  const userModel = new UserModel(fastify.db)
 
   fastify.get('/api/auth/me', {
     schema: {
@@ -13,8 +13,8 @@ export default async (fastify: FastifyInstance) => {
     },
     preValidation: [fastify.authenticate]
   }, async function (request, reply) {
-    return request.user;
-  });
+    return request.user
+  })
 
   fastify.get('/api/auth/admin', {
     schema: {
@@ -22,8 +22,8 @@ export default async (fastify: FastifyInstance) => {
       security: [{ bearer: [] }]
     }
   }, async function (request, reply) {
-    return request.user;
-  });
+    return request.user
+  })
 
   fastify.post('/api/auth/sign-in', {
     schema: {
@@ -34,12 +34,12 @@ export default async (fastify: FastifyInstance) => {
       }).required(),
     }
   }, async function (request, reply) {
-    const data: any = request.body;
+    const data: any = request.body
     const userDb: any = await userModel.findByUsername(data.username)
     if (!userDb) {
       reply.code(401).send({ message: 'Incorrect credentials' })
     } else {
-      const result = bcrypt.compareSync(data.password, userDb.password);
+      const result = bcrypt.compareSync(data.password, userDb.password)
       if (!result) {
         reply.code(401).send({ message: 'Incorrect credentials' })
       } else {
@@ -50,7 +50,7 @@ export default async (fastify: FastifyInstance) => {
           roles: ['admin']
         }, {
           expiresIn: '10h'
-        });
+        })
         reply.send({ token })
       }
     }

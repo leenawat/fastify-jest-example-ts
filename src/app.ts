@@ -1,6 +1,6 @@
-import { join } from 'path';
-import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload';
-import { FastifyPluginAsync } from 'fastify';
+import { join } from 'path'
+import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload'
+import { FastifyPluginAsync } from 'fastify'
 
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -30,10 +30,10 @@ const app: FastifyPluginAsync<AppOptions> = async (
   })
 
   fastify.setValidatorCompiler(({ schema, method, url, httpPart }) => {
-      return data => schema.validate(data, { abortEarly: false })
+    return data => schema.validate(data, { abortEarly: false })
   })
 
-};
+}
 
-export default app;
+export default app
 export { app }

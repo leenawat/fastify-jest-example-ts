@@ -1,7 +1,7 @@
-import { FastifyInstance } from "fastify";
-import { Knex } from 'knex'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { FastifyInstance } from 'fastify'
 
-declare module "fastify" {
+declare module 'fastify' {
     interface FastifyRequest {
         user: any;
         jwtVerify: any;
@@ -22,7 +22,6 @@ declare module "fastify" {
         headers?: unknown;
         response?: unknown;
         validate?: any;
-        validateAsync?: any;
     }
 
 }

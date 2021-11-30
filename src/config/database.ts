@@ -1,7 +1,7 @@
-import knex from 'knex';
-import config from 'config';
+import knex from 'knex'
+import config from 'config'
 
-const dbConfig: any = config.get('database');
+const dbConfig: any = config.get('database')
 export default knex({
     client: dbConfig.client,
     connection: {
