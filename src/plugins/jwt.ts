@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import fp from 'fastify-plugin'
-import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
-import FastifyJwt from 'fastify-jwt'
+import { FastifyRequest, FastifyReply } from 'fastify'
 import config from 'config'
 
 const jwtConfig: any = config.get('jwt')
 
 export default fp(async (fastify: any, opts: any, done: any) => {
-  fastify.register(FastifyJwt, {
+  fastify.register(require('fastify-jwt'), {
     secret: jwtConfig.secret
   })
 

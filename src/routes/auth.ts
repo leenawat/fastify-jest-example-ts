@@ -9,7 +9,7 @@ export default async (fastify: FastifyInstance) => {
   fastify.get('/api/auth/me', {
     schema: {
       tags: ['auth'],
-      security: [{ bearer: [] }]
+      security: [{ Bearer: [] }]
     },
     preValidation: [fastify.authenticate]
   }, async function (request, reply) {
@@ -19,7 +19,7 @@ export default async (fastify: FastifyInstance) => {
   fastify.get('/api/auth/admin', {
     schema: {
       tags: ['auth'],
-      security: [{ bearer: [] }]
+      security: [{ Bearer: [] }]
     }
   }, async function (request, reply) {
     return request.user

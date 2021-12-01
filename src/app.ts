@@ -28,7 +28,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
     dir: join(__dirname, 'routes'),
     options: opts
   })
-
+  
   fastify.setValidatorCompiler(({ schema, method, url, httpPart }) => {
     return data => schema.validate(data, { abortEarly: false })
   })
